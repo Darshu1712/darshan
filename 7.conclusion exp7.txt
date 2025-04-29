@@ -1,0 +1,3 @@
+Postfix notation offers a simpler way to handle mathematical expressions without needing complex
+precedence rules. By using a stack to evaluate postfix expressions, the program efficiently processes
+operands and operators, ensuring that the result is computed correctly.

@@ -1,0 +1,3 @@
+The stack data structure follows the LIFO (Last In, First Out) principle, where the last inserted element is
+removed first. In this lab, we implemented a stack using a linked list, which allows for dynamic memory
+allocation and avoids the limitations of fixed-size arrays.

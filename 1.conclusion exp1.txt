@@ -1,0 +1,1 @@
+Insertion and deletion in an array require shifting elements to maintain the structure .Arrays provide fast access .Using functions enhances code reusability making operations modular and efficient understanding these operations is essential for data structure optimization and efficient algorithm design

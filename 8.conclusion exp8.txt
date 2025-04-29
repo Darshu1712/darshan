@@ -1,0 +1,3 @@
+we successfully implemented a Binary Search Tree (BST). Through this, we gained a deeper understanding of
+hierarchical data structures and how BSTs maintain sorted order, allowing efficient search, insertion, and
+deletion operations.

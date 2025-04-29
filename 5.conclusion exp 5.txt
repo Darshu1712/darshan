@@ -1,0 +1,2 @@
+Circular queues provide an optimized way to manage data in a FIFO manner without wasting memory.
+They are widely used in operating systems, networking, and scheduling applications.
