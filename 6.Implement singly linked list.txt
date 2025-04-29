@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+// Node structure for singly linked list
+struct Node {
+    int data;
+    Node* next;
+};
+
+class SinglyLinkedList {
+private:
+    Node* head;
+
+public:
+    // Constructor to initialize an empty list
+    SinglyLinkedList() {
+        head = nullptr;
+    }
+
+    // Function to insert at the beginning
+    void insertAtBeginning(int value) {
+        Node* newNode = new Node();
+        newNode->data = value;
+        newNode->next = head;
+        head = newNode;
+        cout << value << " inserted at the beginning." << endl;
+    }
+
+    // Function to insert at the end
+    void insertAtEnd(int value) {
+        Node* newNode = new Node();
+        newNode->data = value;
+        newNode->next = nullptr;
+
+        if (head == nullptr) {
+            head = newNode;
+            cout << value << " inserted at the end (list was empty)." << endl;
+            return;
+        }
+
+        Node* temp = head;
+        while (temp->next != nullptr) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        cout << value << " inserted at the end." << endl;
+    }
+
+    // Function to display the linked list
+    void display() {
+        if (head == nullptr)

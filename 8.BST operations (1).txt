@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+
+// Node structure for the BST
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+// Class for BST operations
+class BST {
+private:
+    Node* root;
+
+    // Helper function to insert recursively
+    Node* insert(Node* node, int value) {
+        if (node == nullptr) {
+            Node* newNode = new Node();
+            newNode->data = value;
+            newNode->left = newNode->right = nullptr;
+            return newNode;
+        }
+        if (value < node->data) {
+            node->left = insert(node->left, value);
+        } else if (value > node->data) {
+            node->right = insert(node->right, value);
+        } else {
+            cout << "Duplicate value " << value << " not allowed in BST." << endl;
+        }
+        return node;
+    }
+
+    // Helper function to search recursively
+    bool search(Node* node, int value) {
+        if (node == nullptr) {
+            return false;
+        }
+        if (node->data == value) {
+            return true;
+        } else if (value < node->data) {
+            return search(node->left, value);
+        } else {
+            return search(node->right, value);
+        }
+    }
+
+    // Helper function for inorder traversal
+    void inorder(Node* node) {
+        if (node != nullptr) {
+            inorder(node->left);
+            cout << node->data << " ";
+            inorder(node->right);
+        }
+    }
+
+public:
+    // Constructor to initialize root
+    BST() {
+        root = nullptr;
+    }
+
+    // Public insert function
+    void insert(int value) {
+        root = insert(root, value);
+        cout << value << " inserted into the BST." << endl;
+    }
+
+    // Public search function
+    void search(int value) {
+        if (search(root, value)) {
+            cout << value << " found in the BST." << endl;
+        } else {
+            cout << value << " not found in the BST." << endl;
+        }
+    }
+
+    // Public inorder traversal function
+    void inorder() {
+        cout << "Inorder Traversal: ";
+        inorder(root);
+        cout << endl;
+    }
+};
+
+int main() {

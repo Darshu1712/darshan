@@ -1,0 +1,60 @@
+#include <iostream>
+#include <stack>   // Using built-in stack from STL
+#include <cctype>  // For isdigit()
+using namespace std;
+
+// Function to evaluate postfix expression
+int evaluatePostfix(string expression) {
+    stack<int> s;
+    int operand1, operand2, result;
+
+    for (char ch : expression) {
+        if (isdigit(ch)) {
+            // If the character is a digit, push it onto the stack
+            s.push(ch - '0');  // Convert char to int
+        }
+        else if (ch == ' ') {
+            // Skip spaces
+            continue;
+        }
+        else {
+            // Operator encountered: pop two operands
+            operand2 = s.top(); s.pop();
+            operand1 = s.top(); s.pop();
+
+            switch (ch) {
+                case '+':
+                    result = operand1 + operand2;
+                    break;
+                case '-':
+                    result = operand1 - operand2;
+                    break;
+                case '*':
+                    result = operand1 * operand2;
+                    break;
+                case '/':
+                    result = operand1 / operand2;
+                    break;
+                default:
+                    cout << "Invalid operator: " << ch << endl;
+                    return -1;
+            }
+            // Push the result back onto the stack
+            s.push(result);
+        }
+    }
+
+    // Final result will be the only element in the stack
+    return s.top();
+}
+
+int main() {
+    string expression;
+    cout << "Enter a postfix expression (single-digit operands, e.g., 53+82-*): ";
+    getline(cin, expression);
+
+    int result = evaluatePostfix(expression);
+    cout << "Result of the postfix expression: " << result << endl;
+
+    return 0;
+}
