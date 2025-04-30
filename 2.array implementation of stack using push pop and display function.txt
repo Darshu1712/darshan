@@ -1,79 +1,102 @@
-#include <iostream>
-using namespace std;
-
-#define MAX 100  // Maximum size of the stack
-
-class Stack {
-private:
-    int arr[MAX];
-    int top;
-
-public:
-    // Constructor to initialize stack
-    Stack() {
-        top = -1;
-    }
-
-    // Function to push an element into the stack
-    void push(int value) {
-        if (top >= MAX - 1) {
-            cout << "Stack Overflow! Cannot push " << value << endl;
-            return;
-        }
-        arr[++top] = value;
-        cout << value << " pushed into stack." << endl;
-    }
-
-    // Function to pop an element from the stack
-    void pop() {
-        if (top < 0) {
-            cout << "Stack Underflow! Cannot pop." << endl;
-            return;
-        }
-        cout << arr[top--] << " popped from stack." << endl;
-    }
-
-    // Function to display all elements of the stack
-    void display() {
-        if (top < 0) {
-            cout << "Stack is empty." << endl;
-            return;
-        }
-        cout << "Stack elements are: ";
-        for (int i = top; i >= 0; i--) {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-    }
-};
-
-int main() {
-    Stack s;
-    int choice, value;
-
-    while (true) {
-        cout << "\n*** Stack Menu ***\n";
-        cout << "1. Push\n2. Pop\n3. Display\n4. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch (choice) {
-            case 1:
-                cout << "Enter value to push: ";
-                cin >> value;
-                s.push(value);
-                break;
-            case 2:
-                s.pop();
-                break;
-            case 3:
-                s.display();
-                break;
-            case 4:
-                cout << "Exiting program..." << endl;
-                return 0;
-            default:
-                cout << "Invalid choice. Try again." << endl;
-        }
-    }
-}
+1: #include <stdio.h>
+2: #define MAX 10
+3: int st[MAX], top=-1;
+4: void push();
+5: void pop();
+6: void peek();
+7: void display();
+8: int main()
+9: {
+10: int val, ch;
+11: printf("*********Stack operations
+using array*********");
+12: printf("\n *****MAIN MENU*****");
+13: printf("\n 1. PUSH \n 2. POP \n 3.
+Peek \n 4. display \n 5. Exit");
+14: do
+15: {
+16: printf("\n Please Enter your Choice:
+");
+17: scanf("%d", &ch);
+18: switch(ch)
+19: {
+20: case 1:
+21: push();
+22: break;
+23: case 2:
+24: pop();
+25: break;
+26: case 3:
+27: peek();
+28: break;
+29: case 4:
+30: display();
+31: break;
+32:
+33: case 5:
+34: printf("Exiting....");
+35: break;
+36: default:
+37: printf("Please Enter valid choice ");
+38: }
+39: }while(ch != 5);
+40: return 0;
+41: }
+42: void push()
+43: {
+44: int val;
+45: printf("\n Enter the number to be
+pushed on stack: ");
+46: scanf("%d", &val);
+47: if(top == MAX-1)
+48: {
+49: printf("\n STACK OVERFLOW");
+50: }
+51: else
+52: {
+53: top++;
+54: st[top] = val;
+55: printf("%d Value PUSHED
+Successfully\n", val);
+56: }
+57: }
+58: void pop()
+59: {
+60: int val;
+61: if(top == -1)
+62: {
+63: printf("\n STACK UNDERFLOW");
+64: }
+65: else
+66: {
+67: val= st[top];
+68: top--;
+69:
+70: printf("%d Value POPED Successfully\n",
+val);
+71: }
+72: }
+73: void peek()
+74: {
+75: if (top == -1)
+76: {
+77: printf("Underflow");
+78: }
+79: else
+80: {
+81: printf("\n The value stored at top of
+stack is: %d\n", st[top]);
+82: }
+83: }
+84: void display()
+85: {
+86: int i;
+87: if(top == -1)
+88: printf("\n STACK IS EMPTY");
+89: else
+90: {
+91: for(i=top;i>=0;i--)
+92: printf("\n %d",st[i]);
+93: printf("\n");
+94: }
+95: }
