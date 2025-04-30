@@ -1,81 +1,61 @@
-#include <iostream>
-using namespace std;
-
-#define MAX 100  // Maximum size of the queue
-
-class Queue {
-private:
-    int arr[MAX];
-    int front, rear;
-
-public:
-    // Constructor to initialize the queue
-    Queue() {
-        front = -1;
-        rear = -1;
-    }
-
-    // Function to add an element to the queue
-    void enqueue(int value) {
-        if (rear == MAX - 1) {
-            cout << "Queue Overflow! Cannot enqueue " << value << endl;
-            return;
-        }
-        if (front == -1) front = 0; // First element inserted
-        arr[++rear] = value;
-        cout << value << " enqueued into the queue." << endl;
-    }
-
-    // Function to remove an element from the queue
-    void dequeue() {
-        if (front == -1 || front > rear) {
-            cout << "Queue Underflow! Cannot dequeue." << endl;
-            return;
-        }
-        cout << arr[front++] << " dequeued from the queue." << endl;
-    }
-
-    // Function to display all elements of the queue
-    void display() {
-        if (front == -1 || front > rear) {
-            cout << "Queue is empty." << endl;
-            return;
-        }
-        cout << "Queue elements are: ";
-        for (int i = front; i <= rear; i++) {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
-    }
-};
-
-int main() {
-    Queue q;
-    int choice, value;
-
-    while (true) {
-        cout << "\n*** Queue Menu ***\n";
-        cout << "1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch (choice) {
-            case 1:
-                cout << "Enter value to enqueue: ";
-                cin >> value;
-                q.enqueue(value);
-                break;
-            case 2:
-                q.dequeue();
-                break;
-            case 3:
-                q.display();
-                break;
+#include <stdio.h>
+#define MAX 50
+void addqueue(int);
+int dequeue();
+int A[MAX];
+int Rear=-1;
+int Front=-1;
+int main()
+{
+    int num,choice,i;
+    do
+    {
+        printf("\n1.add \n2.dalete \n3.display \n4.exit");
+        printf("\n enter option:");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:printf("enter no to add in queue:");
+            scanf("%d",&num);
+            addqueue(num);
+            break;
+            case 2:num=dequeue();
+            printf("deleted elements=%d",num);
+            break;
+            case 3:for(i=Front+1;i<=Rear;i++)
+            printf("\t%d",A[i]);
+            break;
             case 4:
-                cout << "Exiting program..." << endl;
-                return 0;
-            default:
-                cout << "Invalid choice. Try again." << endl;
+            default:printf("\n invalid option");
+            break;
         }
     }
+while(choice!=4);
+return 0;
+}
+void addqueue(int num)
+{
+    if(Rear==MAX-1)
+    {
+        printf("\nQueue FULL");
+    }
+    else
+    {
+        Rear++;
+        A[Rear]=num;
+    }
+}
+int dequeue()
+{
+    int n;
+    if(Front==-1&&Rear==-1)
+    {printf("\n queue in empty");
+    return(0);
+}
+else
+{
+    Front++;
+    n=A[Front];
+    return(n);
+}
 }
