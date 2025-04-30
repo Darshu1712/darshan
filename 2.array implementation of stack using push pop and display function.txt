@@ -1,103 +1,111 @@
 
-#include <stdio.h>
-#define MAX 10
-int st[MAX], top=-1;
-void push();
-void pop();
-void peek();
-void display();
-int main()
-{
-int val, ch;
-printf("*********Stack operations
-using array*********");
-printf("\n *****MAIN MENU*****");
-printf("\n 1. PUSH \n 2. POP \n 3.
-Peek \n 4. display \n 5. Exit");
-do
-{
-printf("\n Please Enter your Choice:
-");
-scanf("%d", &ch);
-switch(ch)
-{
-case 1:
-push();
-break;
-case 2:
-pop();
-break;
- case 3:
-peek();
-break;
-case 4:
-display();
- break;
+//link list
 
- case 5:
-printf("Exiting....");
-break;
-default:
-printf("Please Enter valid choice ");
-}
-}while(ch != 5);
-return 0;
-}
-void push()
-{
-int val;
-printf("\n Enter the number to be
-pushed on stack: ");
-scanf("%d", &val);
-if(top == MAX-1)
-{
-printf("\n STACK OVERFLOW");
-}
- else
- {
- top++;
- st[top] = val;
-printf("%d Value PUSHED
-Successfully\n", val);
-}
-}
-void pop()
-{
-int val;
-if(top == -1)
-{
-printf("\n STACK UNDERFLOW");
-}
- else
-{
-val= st[top];
-top--;
+#include <stdio.h> 
+#include <stdlib.h> 
+ 
+ 
+struct Node { 
+    int data; 
+    struct Node* next; 
+}; 
+ 
 
-printf("%d Value POPED Successfully\n",
-val);
-}
-}
- void peek()
-{
-if (top == -1)
- {
- printf("Underflow");
-}
-else
-{
- printf("\n The value stored at top of
-stack is: %d\n", st[top]);
-}
-}
-void display()
-{
- int i;
- if(top == -1)
-printf("\n STACK IS EMPTY");
-else
-{
-for(i=top;i>=0;i--)
-printf("\n %d",st[i]);
-printf("\n");
-}
-}
+struct Node* top = NULL; 
+ 
+ 
+int isEmpty() { 
+    return top == NULL; 
+} 
+ 
+
+void push(int value) { 
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node)); 
+    if (newNode == NULL) { 
+        printf("Stack Overflow!\n"); 
+        return; 
+    } 
+    newNode->data = value; 
+    newNode->next = top; 
+    top = newNode; 
+    printf("%d pushed onto stack.\n", value); 
+} 
+ 
+
+void pop() { 
+    struct Node* temp = top; 
+    int poppedValue; 
+    if (isEmpty()) { 
+ printf("Stack Underflow!\n"); 
+ return; 
+    } 
+ 
+    poppedValue = temp->data; 
+    top = top->next; 
+    free(temp); 
+    printf("%d popped from stack.\n", poppedValue); 
+} 
+ 
+ 
+void peek() { 
+    if (isEmpty()) { 
+        printf("Stack is empty.\n"); 
+        return; 
+    } 
+    printf("Top element: %d\n", top->data); 
+} 
+ 
+ 
+void display() { 
+    struct Node* temp = top; 
+    if (isEmpty()) { 
+ printf("Stack is empty.\n"); 
+ return; 
+    } 
+ 
+    printf("Stack elements: "); 
+    while (temp != NULL) { 
+        printf("%d ", temp->data); 
+        temp = temp->next; 
+    } 
+    printf("\n"); 
+} 
+ 
+int main() { 
+    int choice, value; 
+ 
+    while (1) { 
+        printf("\nStack Operations Menu:\n"); 
+        printf("1. Push\n"); 
+        printf("2. Pop\n"); 
+        printf("3. Peek\n"); 
+        printf("4. Display\n"); 
+        printf("5. Exit\n"); 
+        printf("Enter your choice: "); 
+        scanf("%d", &choice); 
+ 
+        switch (choice) { 
+            case 1: 
+                printf("Enter value to push: "); 
+                scanf("%d", &value); 
+                push(value); 
+                break; 
+            case 2: 
+                pop(); 
+                break; 
+            case 3: 
+                peek(); 
+                break; 
+            case 4: 
+                display(); 
+                break; 
+            case 5: 
+                printf("Exiting...\n"); 
+                exit(0); 
+            default: 
+                printf("Invalid choice, please try again.\n"); 
+        } 
+    } 
+    return 0; 
+} 
+ 
